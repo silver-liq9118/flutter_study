@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 void main() {
   runApp(MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Widget을 상하로 배치하기')),
-        body: Body(),
-      )));
+    appBar: AppBar(title: Text('Widget을 상하로 배치하기')),
+    body: Body(),
+  )));
 }
 
 class Body extends StatelessWidget {
@@ -17,13 +17,10 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(child: Text("Container 1"), color: Colors.red),
-        Container(child: Text("Container 2"), color: Colors.blue),
-        Container(child: Text("Container 3"), color: Colors.green),
+        Container(child: Text("Container 1"), color: Colors.red, width: 100, height: 100),
+        Container(child: Text("Container 2"), color: Colors.blue, width: 100, height: 100),
+        Container(child: Text("Container 3"), color: Colors.green, width: 100, height: 100),
       ],
     );
   }
 }
-
-
-
