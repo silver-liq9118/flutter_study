@@ -15,12 +15,19 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(child: Text("Container 1"), color: Colors.red, width: 100, height: 100),
-        Container(child: Text("Container 2"), color: Colors.blue, width: 100, height: 100),
-        Container(child: Text("Container 3"), color: Colors.green, width: 100, height: 100),
-      ],
+    return Container(
+      height: double.infinity,
+      width:  double.infinity,
+      color: Colors.grey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          Container(child: Text("Container 1"), color: Colors.red, width: 100, height: 100),
+          Container(child: Text("Container 2"), color: Colors.blue, width: 100, height: 100),
+          Container(child: Text("Container 3"), color: Colors.green, width: 100, height: 100),
+        ],
+      ),
     );
   }
 }
