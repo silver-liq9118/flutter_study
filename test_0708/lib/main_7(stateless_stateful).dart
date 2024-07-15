@@ -47,7 +47,15 @@ class ExampleStateful extends StatefulWidget {
 }
 
 class _ExampleStatefulState extends State<ExampleStateful> {
-  int index = 0;
+  late int index;
+
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    index = 5;
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
