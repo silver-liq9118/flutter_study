@@ -19,11 +19,10 @@ class Body extends StatelessWidget {
     return Column(
       children: [
         TestCheckBox(),
-        TestCheckBox(),
-        TestCheckBox(),
         TestRadioButton(),
         TestSlider(),
         TestSwitch(),
+        TestPopupMenu(),
       ],
     );
   }
@@ -56,9 +55,7 @@ class _TestCheckBoxState extends State<TestCheckBox> {
         Checkbox(
             value: values[1],
             onChanged: (value) => changeValue(1, value: value)),
-        Checkbox(
-            value: values[2],
-            onChanged: (value) => changeValue(2, value: value)),
+
       ],
     );
   }
@@ -77,39 +74,39 @@ class TestRadioButton extends StatefulWidget {
   State<TestRadioButton> createState() => _TestRadioButtonState();
 }
 
-enum TestRadioValue {
+enum TestValue {
   test1,
   test2,
   test3,
 }
 
 class _TestRadioButtonState extends State<TestRadioButton> {
-  TestRadioValue? selectValue;
+  TestValue? selectValue;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          leading: Radio<TestRadioValue>(
-            value: TestRadioValue.test1,
+          leading: Radio<TestValue>(
+            value: TestValue.test1,
             groupValue: selectValue,
             onChanged: (value) => setState(() => selectValue = value!),
           ),
-          title: Text(TestRadioValue.test1.name),
+          title: Text(TestValue.test1.name),
           onTap: () => setState(() {
-            if (selectValue != TestRadioValue.test1) {
-              selectValue = TestRadioValue.test1;
+            if (selectValue != TestValue.test1) {
+              selectValue = TestValue.test1;
             }
           }),
         ),
-        Radio<TestRadioValue>(
-          value: TestRadioValue.test2,
+        Radio<TestValue>(
+          value: TestValue.test2,
           groupValue: selectValue,
           onChanged: (value) => setState(() => selectValue = value!),
         ),
-        Radio<TestRadioValue>(
-          value: TestRadioValue.test3,
+        Radio<TestValue>(
+          value: TestValue.test3,
           groupValue: selectValue,
           onChanged: (value) => setState(() => selectValue = value!),
         ),
@@ -172,6 +169,37 @@ class _TestSwitchState extends State<TestSwitch> {
         CupertinoSwitch(value: value,
           onChanged: (newValue) => setState(() => value = newValue),)
       ],
+    );
+  }
+}
+
+class TestPopupMenu extends StatefulWidget {
+  const TestPopupMenu({super.key});
+
+  @override
+  State<TestPopupMenu> createState() => _TestPopupMenuState();
+}
+
+class _TestPopupMenuState extends State<TestPopupMenu> {
+  TestValue selectValue = TestValue.test1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(selectValue.name),
+        PopupMenuButton(
+        itemBuilder: (BuildContext context) {
+          // Use .toList() to convert the iterable to a list
+          return TestValue.values.map((value) =>
+              PopupMenuItem(
+                value: value,
+                child: Text(value.name),  // Assuming value has a property 'name'
+              ),
+          ).toList();  // Convert map result to a list
+        },onSelected: (newValue) => setState(() => selectValue = newValue),
+      )],
+
     );
   }
 }
