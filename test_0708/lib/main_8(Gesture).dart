@@ -21,8 +21,6 @@ class Body extends StatelessWidget {
         TestCheckBox(),
         TestCheckBox(),
         TestCheckBox(),
-
-        
       ],
 
     );
