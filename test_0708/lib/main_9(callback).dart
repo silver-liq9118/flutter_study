@@ -12,7 +12,7 @@ void main() {
 }
 
 class Body extends StatelessWidget {
-  const Body({super.key});
+  const Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,10 @@ class Body extends StatelessWidget {
 }
 
 class TestWidget extends StatefulWidget {
-  const TestWidget({super.key});
+  const TestWidget({Key? key}) : super(key: key);
 
   @override
-  State<TestWidget> createState() => _TestWidgetState();
+  _TestWidgetState createState() => _TestWidgetState();
 }
 
 class _TestWidgetState extends State<TestWidget> {
@@ -32,37 +32,48 @@ class _TestWidgetState extends State<TestWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text(
-        'Count: $value',
-        style: const TextStyle(fontSize: 30),
-      ),
-      TestButton(),
-    ]);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Count: $value',
+          style: const TextStyle(fontSize: 30),
+        ),
+        TestButton(callback: addCounter),
+      ],
+    );
+  }
+
+  void addCounter() {
+    setState(() {
+      value++;
+    });
   }
 }
 
 class TestButton extends StatelessWidget {
-  const TestButton({super.key});
+  final VoidCallback callback;
+
+  const TestButton({required this.callback, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        width: double.infinity,
-        child: GestureDetector(
-          onTap: ()=> print('Tab'),
-          child: Center(
-              child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  decoration: BoxDecoration(border: Border.all()),
-                  child: const Text(
-                    'UpCounter',
-                    style: TextStyle(fontSize: 24),
-                  )
-              )
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      width: double.infinity,
+      child: GestureDetector(
+        onTap: callback,
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            decoration: BoxDecoration(border: Border.all()),
+            child: const Text(
+              'UpCounter',
+              style: TextStyle(fontSize: 24),
+            ),
           ),
-        )
+        ),
+      ),
     );
   }
 }
